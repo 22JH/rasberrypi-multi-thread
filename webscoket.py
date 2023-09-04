@@ -8,64 +8,20 @@ import base64
 from asyncio import Queue
 
 SERVER_URL = "www.share42-together.com"
-#SERVER_URL = "192.168.45.145"
 PROTOCOL = "wss" # ws / wss
-
-####################################
-####### cam location ##############
-###################################
-#capture1 = cv2.VideoCapture(1)   #
-#capture2 = cv2.VideoCapture(2)   #
-##################################
-
 
 ########### encoding qultiy#######################
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-################################################
-###########################################
-
-
-######### cam qulity setting ##############
-############################################
-#capture1.set(cv2.CAP_PROP_FRAME_WIDTH, 640)#
-#capture1.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)#
-#############################################
-
-########### cam check###########
-
-#if not capture2.isOpened():
-#    print('cam2 connect fail')
-#    exit()
-#################################
     
-    
-#box1 = serial.Serial(port = "/dev/ttyAMA0",
-#                    baudrate = 9600,
-#                    bytesize = serial.EIGHTBITS,
-#                    parity = serial.PARITY_NONE,
-#                    timeout =1)
-
-#box2 = serial.Serial(port = "/dev/ttyACM0",
-#                   baudrate = 9600,
-#                    bytesize = serial.EIGHTBITS,
-#                    parity = serial.PARITY_NONE,
-#                    timeout =1)
-
 async def serial_task(serial_queue: Queue, websocket_queue: Queue):
     box1 = serial.Serial(port = "/dev/ttyACM0",
                     baudrate = 9600,
                     bytesize = serial.EIGHTBITS,
                     parity = serial.PARITY_NONE,
                     timeout =1)    
-#    box2 = serial.Serial(port = "/dev/ttyACM1",
-#                       baudrate = 9600,
-#                        bytesize = serial.EIGHTBITS,
-#                        parity = serial.PARITY_NONE,
-#                        timeout =1)
     
     while 1:
         ardRes1 = box1.readline().decode('utf-8').strip()
-#        ardRes2 = box2.readline().decode('utf-8').strip()
         
         if ardRes1:
             
